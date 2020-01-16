@@ -1,7 +1,6 @@
 #include <cassert>
 #include <iostream>
 
-
 using namespace std;
 
 class NodeTest1 {
@@ -45,4 +44,7 @@ void test1() {
     auto *Tmp = new NodeTest1(I * I);
     N4Arr[I] = Tmp;
   }
+
+  delete[] N3Arr;
+  
 }
