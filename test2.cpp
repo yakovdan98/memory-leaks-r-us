@@ -23,6 +23,7 @@ public:
     cout << "Deleting: " << *this;
     --NodeCount;
     cout << ", nodes remaining: " << NodeCount << endl;
+    delete Next;
   }
 };
 
@@ -49,9 +50,12 @@ NodeTest2 *addAfter(NodeTest2 *A, NodeTest2 *B) {
 NodeTest2 *addBefore(NodeTest2 *Start, int ValA, int ValB) {
   assert(Start != nullptr);
   NodeTest2 *NodeB = find(Start, ValB);
+  if (NodeB == Start)
+    return Start;
   auto *NodeA = new NodeTest2(ValA);
   NodeA->Next = NodeB;
   NodeTest2 *Curr = Start;
+
   while (Curr->Next != NodeB)
     Curr = Curr->Next;
   Curr->Next = NodeA;
@@ -59,12 +63,18 @@ NodeTest2 *addBefore(NodeTest2 *Start, int ValA, int ValB) {
 }
 
 NodeTest2 *remove(NodeTest2 *Start, NodeTest2 *N) {
+  if (N == nullptr)
+    return Start;
   assert(Start != nullptr);
   NodeTest2 *Curr = Start;
   while (Curr != nullptr && Curr->Next != N)
     Curr = Curr->Next;
-  if (Curr != nullptr)
+  if (Curr != nullptr) {
+
     Curr->Next = N->Next;
+    N->Next = nullptr;
+    delete N;
+  }
   return Start;
 }
 
@@ -88,7 +98,7 @@ void test2() {
     Tail = addAfter(Tail, new NodeTest2(I * I * I));
   }
   displayAll(Head);
-  addBefore(Head, 7, 8);
+  Head = addBefore(Head, 7, 8);
   addBefore(Head, 13, 125);
   addBefore(Head, 15, 9);
   addBefore(Head, 17, 11);
@@ -100,4 +110,6 @@ void test2() {
   remove(Head, find(Head, 100));
   remove(Head, find(Head, 19));
   displayAll(Head);
+
+  delete Head;
 }

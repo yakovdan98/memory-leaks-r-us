@@ -45,13 +45,17 @@ void test1() {
     N4Arr[I] = Tmp;
   }
 
+  //deletion of pointers
   delete N2Ptr;
   delete[] N3Arr;
+  //deletion of pointers in pointer array
   for (int i = 6; i < 10; ++i) {
-    if (N4Arr[i] != nullptr) {
+    if (N4Arr[i] != NULL) {
       delete N4Arr[i];
 	}
     
   }
+  //deletion of array
   delete[] N4Arr;
+
 }
