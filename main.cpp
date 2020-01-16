@@ -32,9 +32,9 @@ void test3();
 
 int main() {
   cout << "Starting memory-leaks-r-us...." << endl;
-//  test1();
+  test1();
   test2();
-//  test3();
+  test3();
   cout << "Successfully completed memory-leaks-r-us...." << endl;
   return 0;
 }

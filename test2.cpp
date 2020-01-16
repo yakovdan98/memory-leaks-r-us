@@ -23,6 +23,7 @@ public:
     cout << "Deleting: " << *this;
     --NodeCount;
     cout << ", nodes remaining: " << NodeCount << endl;
+	//recursive delete of linked list
     delete Next;
   }
 };
@@ -50,6 +51,7 @@ NodeTest2 *addAfter(NodeTest2 *A, NodeTest2 *B) {
 NodeTest2 *addBefore(NodeTest2 *Start, int ValA, int ValB) {
   assert(Start != nullptr);
   NodeTest2 *NodeB = find(Start, ValB);
+  //if the start is the same as node to insert before return the start
   if (NodeB == Start)
     return Start;
   auto *NodeA = new NodeTest2(ValA);
@@ -73,6 +75,7 @@ NodeTest2 *remove(NodeTest2 *Start, NodeTest2 *N) {
 
     Curr->Next = N->Next;
     N->Next = nullptr;
+	//deletion of N to prevent memory leak
     delete N;
   }
   return Start;
@@ -111,5 +114,6 @@ void test2() {
   remove(Head, find(Head, 19));
   displayAll(Head);
 
+  //deletion of head
   delete Head;
 }
