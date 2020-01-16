@@ -45,6 +45,13 @@ void test1() {
     N4Arr[I] = Tmp;
   }
 
+  delete N2Ptr;
   delete[] N3Arr;
-  
+  for (int i = 6; i < 10; ++i) {
+    if (N4Arr[i] != nullptr) {
+      delete N4Arr[i];
+	}
+    
+  }
+  delete[] N4Arr;
 }
